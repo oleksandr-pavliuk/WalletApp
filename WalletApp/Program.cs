@@ -18,6 +18,7 @@ namespace WalletApp
             builder.Services.AddScoped<IUserService, UserService>();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.AddAutoMapper(typeof(MappingProfile));
             DataSeeder.Seed();
             var app = builder.Build();
 

@@ -13,7 +13,7 @@ namespace WalletApp.Application.Services.Transaction
         }
         public Task<OperationResult<TransactionDto>> GetTransactionByIdAsync(int accountId, int id)
         {
-            throw new NotImplementedException();
+            var transaction 
         }
 
         public Task<OperationResult<List<TransactionDto>>> GetTransactionListAsync(int accountId)
