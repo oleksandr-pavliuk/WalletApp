@@ -12,7 +12,7 @@ using WalletApp.Infrastructure.DatabaseContext;
 namespace WalletApp.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20240127150452_InitialCreate")]
+    [Migration("20240127165435_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -25,25 +25,6 @@ namespace WalletApp.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("WalletApp.Domain.Account", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<decimal>("Balance")
-                        .HasColumnType("numeric");
-
-                    b.Property<long>("Points")
-                        .HasColumnType("bigint");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Accounts");
-                });
-
             modelBuilder.Entity("WalletApp.Domain.Transaction", b =>
                 {
                     b.Property<int>("Id")
@@ -51,9 +32,6 @@ namespace WalletApp.Migrations
                         .HasColumnType("integer");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("AccountId")
-                        .HasColumnType("integer");
 
                     b.Property<string>("Bank")
                         .IsRequired()
@@ -76,22 +54,52 @@ namespace WalletApp.Migrations
                     b.Property<int>("TransactionStatus")
                         .HasColumnType("integer");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("UserSender")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("AccountId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Transactions");
                 });
 
+            modelBuilder.Entity("WalletApp.Domain.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<decimal>("Balance")
+                        .HasColumnType("numeric");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<long>("Points")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Users");
+                });
+
             modelBuilder.Entity("WalletApp.Domain.Transaction", b =>
                 {
-                    b.HasOne("WalletApp.Domain.Account", "Account")
+                    b.HasOne("WalletApp.Domain.User", "User")
                         .WithMany()
-                        .HasForeignKey("AccountId")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Account");
+                    b.Navigation("User");
                 });
 #pragma warning restore 612, 618
         }

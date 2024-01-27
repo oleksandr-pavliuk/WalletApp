@@ -9,8 +9,9 @@
         public Status TransactionStatus { get; set; }
         public DateTime Date { get; set; }
         public string Bank { get; set; }
-        public int AccountId { get; set; }
-        public Account Account { get; set; }
+        public string UserSender { get; set; }
+        public int UserId { get; set; }
+        public User User { get; set; }
     }
 
     public enum Status

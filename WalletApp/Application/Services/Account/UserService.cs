@@ -1,6 +1,6 @@
 ﻿namespace WalletApp.Application.Services.Account
 {
-    public interface IAccountService
+    public class UserService : IUserService
     {
     }
 }

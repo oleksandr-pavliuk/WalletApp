@@ -13,17 +13,18 @@ namespace WalletApp.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Accounts",
+                name: "Users",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Points = table.Column<long>(type: "bigint", nullable: false),
-                    Balance = table.Column<decimal>(type: "numeric", nullable: false)
+                    Balance = table.Column<decimal>(type: "numeric", nullable: false),
+                    Name = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Accounts", x => x.Id);
+                    table.PrimaryKey("PK_Users", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -38,23 +39,24 @@ namespace WalletApp.Migrations
                     TransactionStatus = table.Column<int>(type: "integer", nullable: false),
                     Date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     Bank = table.Column<string>(type: "text", nullable: false),
-                    AccountId = table.Column<int>(type: "integer", nullable: false)
+                    UserSender = table.Column<string>(type: "text", nullable: false),
+                    UserId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Transactions", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Transactions_Accounts_AccountId",
-                        column: x => x.AccountId,
-                        principalTable: "Accounts",
+                        name: "FK_Transactions_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Transactions_AccountId",
+                name: "IX_Transactions_UserId",
                 table: "Transactions",
-                column: "AccountId");
+                column: "UserId");
         }
 
         /// <inheritdoc />
@@ -64,7 +66,7 @@ namespace WalletApp.Migrations
                 name: "Transactions");
 
             migrationBuilder.DropTable(
-                name: "Accounts");
+                name: "Users");
         }
     }
 }
