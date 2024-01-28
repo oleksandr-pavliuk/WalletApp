@@ -18,9 +18,12 @@ namespace WalletApp.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Points = table.Column<long>(type: "bigint", nullable: false),
+                    Points = table.Column<double>(type: "double precision", nullable: false),
                     Balance = table.Column<decimal>(type: "numeric", nullable: false),
-                    Name = table.Column<string>(type: "text", nullable: false)
+                    Name = table.Column<string>(type: "text", nullable: false),
+                    LastPoint = table.Column<double>(type: "double precision", nullable: false),
+                    PreLastPoint = table.Column<double>(type: "double precision", nullable: false),
+                    LastDatePoint = table.Column<DateOnly>(type: "date", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -39,7 +42,7 @@ namespace WalletApp.Migrations
                     TransactionStatus = table.Column<int>(type: "integer", nullable: false),
                     Date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     Bank = table.Column<string>(type: "text", nullable: false),
-                    UserSender = table.Column<string>(type: "text", nullable: false),
+                    UserSender = table.Column<string>(type: "text", nullable: true),
                     UserId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>

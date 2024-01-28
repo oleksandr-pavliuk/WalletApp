@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using WalletApp.Application.Services.Transaction;
 
 namespace WalletApp.Presentation.Controllers
@@ -15,8 +14,8 @@ namespace WalletApp.Presentation.Controllers
             _transaction = transaction;
         }
 
-        [HttpGet("get-transaction-list/{id}")]
-        public async Task<IActionResult> GetTransactionList(int id)
+        [HttpGet("list")]
+        public async Task<IActionResult> GetTransactionList([FromQuery]int id)
         {
             var result = await _transaction.GetTransactionListAsync(id);
 
@@ -26,6 +25,15 @@ namespace WalletApp.Presentation.Controllers
             return Ok(result.Data);
         }
 
-        
+        [HttpGet]
+        public async Task<IActionResult> GetTransactionById([FromQuery]int id)
+        {
+            var result = await _transaction.GetTransactionByIdAsync(id);
+
+            if (!result.IsSuccessful)
+                return BadRequest(result.Message);
+
+            return Ok(result.Data);
+        }
     }
 }

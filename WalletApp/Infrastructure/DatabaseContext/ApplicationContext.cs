@@ -1,6 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using System.Security.Cryptography.X509Certificates;
 using WalletApp.Domain;
 
 namespace WalletApp.Infrastructure.DatabaseContext
@@ -15,7 +13,7 @@ namespace WalletApp.Infrastructure.DatabaseContext
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Username=postgres;Password=databasePass1;Database=wallet-db;Pooling=true;");
+            optionsBuilder.UseNpgsql(/*db conn string*/);
         }
     }
 }

@@ -55,7 +55,6 @@ namespace WalletApp.Migrations
                         .HasColumnType("integer");
 
                     b.Property<string>("UserSender")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
@@ -76,12 +75,21 @@ namespace WalletApp.Migrations
                     b.Property<decimal>("Balance")
                         .HasColumnType("numeric");
 
+                    b.Property<DateOnly>("LastDatePoint")
+                        .HasColumnType("date");
+
+                    b.Property<double>("LastPoint")
+                        .HasColumnType("double precision");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<long>("Points")
-                        .HasColumnType("bigint");
+                    b.Property<double>("Points")
+                        .HasColumnType("double precision");
+
+                    b.Property<double>("PreLastPoint")
+                        .HasColumnType("double precision");
 
                     b.HasKey("Id");
 

@@ -6,6 +6,6 @@ namespace WalletApp.Application.Services.Transaction
     public interface ITransactionService
     {
         Task<OperationResult<List<TransactionDto>>> GetTransactionListAsync(int accountId);
-        Task<OperationResult<TransactionDto>> GetTransactionByIdAsync(int accountId, int id);
+        Task<OperationResult<TransactionDto>> GetTransactionByIdAsync(int id);
     }
 }

@@ -9,7 +9,7 @@
         public Status TransactionStatus { get; set; }
         public DateTime Date { get; set; }
         public string Bank { get; set; }
-        public string UserSender { get; set; }
+        public string? UserSender { get; set; }
         public int UserId { get; set; }
         public User User { get; set; }
     }
