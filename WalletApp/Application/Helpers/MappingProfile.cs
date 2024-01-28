@@ -8,11 +8,7 @@ namespace WalletApp.Application.Helpers
     {
         public MappingProfile()
         {
-            // Add as many of these lines as you need to map your objects
-            CreateMap<User, UserDto>();
-            CreateMap<UserDto, User>();
-            CreateMap<Transaction, TransactionDto>();
-            CreateMap<TransactionDto, Transaction>();
+            CreateMap<Transaction, TransactionDto>().ForMember(tran => tran.transaction_status, opt => opt.MapFrom(src => (int)src.TransactionStatus));
         }
     }
 }
